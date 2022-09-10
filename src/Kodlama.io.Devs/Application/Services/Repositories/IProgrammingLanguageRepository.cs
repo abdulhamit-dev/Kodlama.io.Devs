@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Repositories
 {
-    public interface IProgrammingLangugageRepository : IAsyncRepository<ProgrammingLanguage>, IRepository<ProgrammingLanguage>
+    public interface IProgrammingLanguageRepository : IAsyncRepository<ProgrammingLanguage>, IRepository<ProgrammingLanguage>
     {
     }
 }

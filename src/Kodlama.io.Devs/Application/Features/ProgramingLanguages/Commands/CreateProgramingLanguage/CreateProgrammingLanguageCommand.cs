@@ -18,10 +18,10 @@ namespace Application.Features.ProgramingLanguages.Commands.CreateProgramingLang
 
         public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
         {
-            private readonly IProgrammingLangugageRepository _programmingLanguageRepository;
+            private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
             private readonly ProgrammingLanguageBusinessRule _programingLanguageBusinessRule;
-            public CreateProgrammingLanguageCommandHandler(IProgrammingLangugageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRule programingLanguageBusinessRule)
+            public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRule programingLanguageBusinessRule)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
@@ -32,7 +32,7 @@ namespace Application.Features.ProgramingLanguages.Commands.CreateProgramingLang
             {
                 await _programingLanguageBusinessRule.ProgramingNameCanNotBeDuplicatedWhenInserted(request.Name);
                 ProgrammingLanguage programingLanguages = _mapper.Map<ProgrammingLanguage>(request);
-                ProgrammingLanguage createdProgramingLanguage = _programmingLanguageRepository.Add(programingLanguages);
+                ProgrammingLanguage createdProgramingLanguage =await _programmingLanguageRepository.AddAsync(programingLanguages);
                 CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgramingLanguage);
 
                 return createdProgrammingLanguageDto;

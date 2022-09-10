@@ -1,4 +1,5 @@
 ﻿using Application.Features.ProgramingLanguages.Commands.CreateProgramingLanguage;
+using Application.Features.ProgramingLanguages.Commands.UpdateProgramingLanguage;
 using Application.Features.ProgramingLanguages.Dtos;
 using AutoMapper;
 using Domain.Entities;
@@ -16,6 +17,9 @@ namespace Application.Features.ProgramingLanguages.Profiles
         {
             CreateMap<ProgrammingLanguage, CreatedProgrammingLanguageDto>().ReverseMap();
             CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommand>().ReverseMap();
+
+            CreateMap<ProgrammingLanguage, UpdatedProgrammingLanguageDto>().ReverseMap();
+            CreateMap<ProgrammingLanguage, UpdateProgrammingLanguageCommand>().ReverseMap();
         }
     }
 }

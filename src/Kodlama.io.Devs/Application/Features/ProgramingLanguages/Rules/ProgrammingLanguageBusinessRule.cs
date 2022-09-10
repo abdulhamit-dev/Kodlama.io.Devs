@@ -13,9 +13,9 @@ namespace Application.Features.ProgramingLanguages.Rules
 {
     public class ProgrammingLanguageBusinessRule
     {
-        private readonly IProgrammingLangugageRepository _programingLangugageRepository;
+        private readonly IProgrammingLanguageRepository _programingLangugageRepository;
 
-        public ProgrammingLanguageBusinessRule(IProgrammingLangugageRepository programingLangugageRepository)
+        public ProgrammingLanguageBusinessRule(IProgrammingLanguageRepository programingLangugageRepository)
         {
             _programingLangugageRepository = programingLangugageRepository;
         }
@@ -23,8 +23,16 @@ namespace Application.Features.ProgramingLanguages.Rules
         public async Task ProgramingNameCanNotBeDuplicatedWhenInserted(string name)
         {
             IPaginate<ProgrammingLanguage> result = await _programingLangugageRepository.GetListAsync(b => b.Name == name);
-            if (result.Items.Any()) throw new BusinessException("Programing langugage name exists.");
+            if (result.Items.Any()) 
+                throw new BusinessException("Programing langugage name exists.");
         }
 
+        public async Task ProgramingIdNotFound(int id)
+        {
+            ProgrammingLanguage? result = await _programingLangugageRepository.GetAsync(b => b.Id == id);
+            if (result == null) 
+                throw new BusinessException("Programing langugage not found.");
+         
+        }
     }
 }

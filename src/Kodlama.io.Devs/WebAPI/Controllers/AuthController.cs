@@ -1,5 +1,6 @@
 ﻿using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Dtos;
+using Application.Features.Auth.Queries.Login;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,11 @@ namespace WebAPI.Controllers
             return Created("", result);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Login([FromBody] LoginUserQuery loginUserQuery)
-        //{
-        //    LoggedInUserDto result = await Mediator.Send(loginUserQuery);
-        //    return Ok(result);
-        //}
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserQuery loginUserQuery)
+        {
+            UserLoginDto result = await Mediator.Send(loginUserQuery);
+            return Ok(result);
+        }
     }
 }

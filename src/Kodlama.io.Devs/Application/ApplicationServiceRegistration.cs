@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;
 using Application.Features.LanguageTechnologies.Rules;
+using Core.Application.Pipelines.Validation;
 
 namespace Application
 {
@@ -16,7 +17,7 @@ namespace Application
             services.AddScoped<ProgrammingLanguageBusinessRule>();
             services.AddScoped<LanguageTechnologyBusinessRule>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             return services;
         }
     }

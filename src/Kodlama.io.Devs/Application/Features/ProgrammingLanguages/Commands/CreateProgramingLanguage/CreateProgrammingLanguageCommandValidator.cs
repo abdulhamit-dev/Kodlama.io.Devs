@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ProgramingLanguages.Commands.CreateProgramingLanguage
+namespace Application.Features.ProgrammingLanguages.Commands.CreateProgramingLanguage
 {
     public class CreateProgrammingLanguageCommandValidator : AbstractValidator<CreateProgrammingLanguageCommand>
     {

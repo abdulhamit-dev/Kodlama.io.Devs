@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.CrossCuttingConcerns.Exceptions;
 
-namespace Application.Features.ProgramingLanguages.Rules
+namespace Application.Features.ProgrammingLanguages.Rules
 {
     public class ProgrammingLanguageBusinessRule
     {
@@ -27,12 +27,16 @@ namespace Application.Features.ProgramingLanguages.Rules
                 throw new BusinessException("Programing langugage name exists.");
         }
 
-        public async Task ProgramingIdNotFound(int id)
+        public async Task ProgramingShouldExistWhenRequested(int id)
         {
             ProgrammingLanguage? result = await _programingLangugageRepository.GetAsync(b => b.Id == id);
             if (result == null) 
                 throw new BusinessException("Programing langugage not found.");
-         
+        }
+        public async Task ProgramingShouldExistWhenRequested(ProgrammingLanguage programmingLanguage)
+        {
+            if (programmingLanguage == null)
+                throw new BusinessException("Programing langugage not found.");
         }
     }
 }

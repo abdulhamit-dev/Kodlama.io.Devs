@@ -1,12 +1,12 @@
-﻿using Application.Features.ProgramingLanguages.Dtos;
-using Application.Features.ProgramingLanguages.Rules;
+﻿using Application.Features.ProgrammingLanguages.Dtos;
+using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.ProgramingLanguages.Commands.UpdateProgramingLanguage
+namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgramingLanguage
 {
     public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>
     {
@@ -27,9 +27,9 @@ namespace Application.Features.ProgramingLanguages.Commands.UpdateProgramingLang
 
             public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
+                await _programmingLanguageBusinessRule.ProgramingShouldExistWhenRequested(request.Id);
+
                 await _programmingLanguageBusinessRule.ProgramingNameCanNotBeDuplicatedWhenInserted(request.Name);
-                
-                await _programmingLanguageBusinessRule.ProgramingIdNotFound(request.Id);
 
                 ProgrammingLanguage programmingLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 await _programmingLanguageRepository.UpdateAsync(programmingLanguage);

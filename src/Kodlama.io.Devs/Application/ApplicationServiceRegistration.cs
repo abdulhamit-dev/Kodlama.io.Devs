@@ -1,4 +1,4 @@
-﻿using Application.Features.ProgramingLanguages.Rules;
+﻿using Application.Features.ProgrammingLanguages.Rules;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;

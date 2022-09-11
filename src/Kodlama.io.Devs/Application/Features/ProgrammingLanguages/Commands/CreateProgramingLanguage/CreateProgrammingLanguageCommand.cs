@@ -1,5 +1,5 @@
-﻿using Application.Features.ProgramingLanguages.Dtos;
-using Application.Features.ProgramingLanguages.Rules;
+﻿using Application.Features.ProgrammingLanguages.Dtos;
+using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ProgramingLanguages.Commands.CreateProgramingLanguage
+namespace Application.Features.ProgrammingLanguages.Commands.CreateProgramingLanguage
 {
     public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
     {

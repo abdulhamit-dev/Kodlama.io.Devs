@@ -13,6 +13,7 @@ namespace Persistence.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> ProgramingLanguages { get; set; }
+        public DbSet<LanguageTechnology> LanguageTechnologies { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -26,12 +27,23 @@ namespace Persistence.Contexts
                 a.ToTable("ProgramingLanguages").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
+                a.HasMany(p => p.LanguageTechnologies);
+            });
+
+            modelBuilder.Entity<LanguageTechnology>(a =>
+            {
+                a.ToTable("LanguageTechnologies").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.HasOne(p => p.ProgrammingLanguage);
             });
 
             ProgrammingLanguage[] programingLanguage = { new ProgrammingLanguage(1, "C#") };
-
             modelBuilder.Entity<ProgrammingLanguage>().HasData(programingLanguage);
 
+
+            LanguageTechnology[] languageTechnologies = { new LanguageTechnology(1,1,"asp.net") };
+            modelBuilder.Entity<LanguageTechnology>().HasData(languageTechnologies);
         }
     }
 }

@@ -6,6 +6,7 @@ using FluentValidation;
 using Application.Features.LanguageTechnologies.Rules;
 using Core.Application.Pipelines.Validation;
 using Application.Features.Auth.Rules;
+using Application.Features.UserProfiles.Rules;
 
 namespace Application
 {
@@ -17,6 +18,7 @@ namespace Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<ProgrammingLanguageBusinessRule>();
             services.AddScoped<LanguageTechnologyBusinessRule>();
+            services.AddScoped<UserProfileBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));

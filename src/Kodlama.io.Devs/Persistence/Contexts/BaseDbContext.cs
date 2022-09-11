@@ -18,6 +18,7 @@ namespace Persistence.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -27,38 +28,44 @@ namespace Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
           
-            modelBuilder.Entity<ProgrammingLanguage>(a =>
+            modelBuilder.Entity<ProgrammingLanguage>(x =>
             {
-                a.ToTable("ProgramingLanguages").HasKey(k => k.Id);
+                x.ToTable("ProgramingLanguages").HasKey(x => x.Id);
                 //a.Property(p => p.Id).HasColumnName("Id");
                 //a.Property(p => p.Name).HasColumnName("Name");
-                a.HasMany(p => p.LanguageTechnologies);
+                x.HasMany(p => p.LanguageTechnologies);
             });
 
-            modelBuilder.Entity<LanguageTechnology>(a =>
+            modelBuilder.Entity<LanguageTechnology>(x =>
             {
-                a.ToTable("LanguageTechnologies").HasKey(k => k.Id);
+                x.ToTable("LanguageTechnologies").HasKey(x => x.Id);
                 //a.Property(p => p.Id).HasColumnName("Id");
                 //a.Property(p => p.Name).HasColumnName("Name");
-                a.HasOne(p => p.ProgrammingLanguage);
+                x.HasOne(p => p.ProgrammingLanguage);
             });
 
-            modelBuilder.Entity<User>(a =>
+            modelBuilder.Entity<User>(x =>
             {
-                a.ToTable("Users").HasKey(k => k.Id);
-                a.HasMany(a => a.UserOperationClaims);
+                x.ToTable("Users").HasKey(x => x.Id);
+                x.HasMany(x => x.UserOperationClaims);
             });
 
-            modelBuilder.Entity<OperationClaim>(a =>
+            modelBuilder.Entity<OperationClaim>(x =>
             {
-                a.ToTable("OperationClaims").HasKey(k => k.Id);
+                x.ToTable("OperationClaims").HasKey(x => x.Id);
             });
 
-            modelBuilder.Entity<UserOperationClaim>(a =>
+            modelBuilder.Entity<UserOperationClaim>(x =>
             {
-                a.ToTable("UserOperationClaims").HasKey(k => k.Id);
-                a.HasOne(a => a.User);
-                a.HasOne(a => a.OperationClaim);
+                x.ToTable("UserOperationClaims").HasKey(x => x.Id);
+                x.HasOne(x => x.User);
+                x.HasOne(x => x.OperationClaim);
+            });
+
+            modelBuilder.Entity<UserProfile>(x =>
+            {
+                x.ToTable("UserProfiles").HasKey(x => x.Id);
+                x.HasOne(x => x.User);
             });
 
             ProgrammingLanguage[] programingLanguage = { new ProgrammingLanguage(1, "C#") };

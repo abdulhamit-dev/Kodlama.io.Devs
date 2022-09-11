@@ -6,11 +6,13 @@ using Application.Features.ProgrammingLanguages.Models;
 using Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProgrammingLanguagesController : BaseController
@@ -31,9 +33,8 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete/{Id}")]
-        public async Task<IActionResult> Delete([FromRoute] int Id)
+        public async Task<IActionResult> Delete([FromRoute] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
         {
-            DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand = new() { Id = Id };
             DeletedProgrammingLanguageDto result = await Mediator.Send(deleteProgrammingLanguageCommand);
             return Ok(result);
         }
@@ -46,7 +47,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("getbyid/{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
         {
             ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = await Mediator.Send(getByIdProgrammingLanguageQuery);
